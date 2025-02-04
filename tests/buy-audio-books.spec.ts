@@ -1,0 +1,32 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://thuprai.com/');
+  await expect(page.getByRole('link', { name: 'AUDIOBOOKS', exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'AUDIOBOOKS', exact: true }).click();
+  await expect(page.getByText('AudiobooksFilterGenreBiography & MemoirsBusiness &')).toBeVisible();
+  await expect(page.getByText('पल्पसा क्याफेखलंगामा हमलामुकाम रणमैदानअर्थात् परिवर्तनजीवन जिउने काइदासेतो बाघओ ')).toBeVisible();
+  await page.getByRole('link', { name: 'पल्पसा क्याफे' }).click();
+  await expect(page.getByRole('heading', { name: 'Awards' })).toBeVisible();
+  await expect(page.getByText('Audiobook Rs 130Narrated by Khagendra NepaliAdd to cartListen now')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Audiobook' })).toBeVisible();
+  await expect(page.getByText('130')).toBeVisible();
+  await expect(page.getByText('Narrated by')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Khagendra Nepali' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Add to cart' }).nth(1)).toBeVisible();
+  await page.getByRole('button', { name: 'Add to cart' }).nth(1).click();
+  await expect(page.getByRole('button', { name: 'Cart', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Cart', exact: true }).click();
+  await expect(page.getByText('Your Cart Palpasa Café')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'PLACE ORDER' })).toBeVisible();
+  await page.getByRole('link', { name: 'PLACE ORDER' }).click();
+  await page.getByRole('textbox', { name: 'Email*' }).click();
+  await expect(page.locator('[id="__nuxt"]')).toBeVisible();
+  await page.getByRole('textbox', { name: 'Email*' }).click();
+  await page.getByRole('textbox', { name: 'Email*' }).fill('kushma@awecode.com');
+  await page.getByRole('textbox', { name: 'Password*' }).click();
+  await page.getByRole('textbox', { name: 'Password*' }).fill('thuprai123');
+  await page.getByRole('button', { name: 'Login' }).click();
+  await expect(page.getByRole('heading', { name: 'Order #' })).toBeVisible();
+  await expect(page.locator('.bg-white > div > div > div')).toBeVisible();
+});
